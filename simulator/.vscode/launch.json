@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "simulator"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - a",
+            "request": "launch",
+            "mainClass": "a",
+            "projectName": "simulator"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Simulator",
+            "request": "launch",
+            "mainClass": "main.Simulator",
+            "projectName": "simulator"
+        }
+    ]
+}
