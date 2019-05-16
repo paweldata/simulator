@@ -9,38 +9,40 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import main.*;
+import surface.Surface;
 
 public class EntryFrame extends JFrame implements ActionListener {
-    private Simulator Simulator;
-    private JTextField height;
-    private JTextField width;
-    private JTextField rabbitsNumber;
-    private JTextField delay;
+    private JTextField heightTextField;
+    private JTextField widthTextField;
+    private JTextField rabbitsNumberTextField;
+    private JTextField delayTextField;
     private JLabel info;
     private JButton button;
 
-    public EntryFrame(Simulator Simulator) {
-        this.Simulator = Simulator;
+    int height;
+    int width;
+    int rabbitsNumber;
+    int delay;
 
+    public EntryFrame() {
         this.setSize(400, 400);
         this.setLayout(new GridLayout(5, 2));
 
         this.add(new JLabel("Height : "));
-        height = new JTextField();
-        this.add(height);
+        heightTextField = new JTextField();
+        this.add(heightTextField);
 
         this.add(new JLabel("Width : "));
-        width = new JTextField();
-        this.add(width);
+        widthTextField = new JTextField();
+        this.add(widthTextField);
 
         this.add(new JLabel("Rabbits : "));
-        rabbitsNumber = new JTextField();
-        this.add(rabbitsNumber);
+        rabbitsNumberTextField = new JTextField();
+        this.add(rabbitsNumberTextField);
 
         this.add(new JLabel("Delay : "));
-        delay = new JTextField();
-        this.add(delay);
+        delayTextField = new JTextField();
+        this.add(delayTextField);
 
         button = new JButton("OK");
         button.addActionListener(this);
@@ -51,44 +53,36 @@ public class EntryFrame extends JFrame implements ActionListener {
 
         this.setTitle("Simulator");
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (checkData()) {
-            System.out.println(":D");
+            this.setVisible(false);
+            new Surface(rabbitsNumber, delay, height, width);
         }
     }
 
     private boolean checkData() {
-        int height;
-        int width;
-        int rabbitsNumber;
-        int delay;
-
         this.info.setText("");
 
         try {
-            height = Integer.parseInt(this.height.getText());
-            width = Integer.parseInt(this.width.getText());
-            rabbitsNumber = Integer.parseInt(this.rabbitsNumber.getText());
-            delay = Integer.parseInt(this.delay.getText());
+            height = Integer.parseInt(this.heightTextField.getText());
+            width = Integer.parseInt(this.widthTextField.getText());
+            rabbitsNumber = Integer.parseInt(this.rabbitsNumberTextField.getText());
+            delay = Integer.parseInt(this.delayTextField.getText());
 
             if (height < 0 || height > 30) {
                 this.info.setText("Incorrect height");
             } else if (width < 0 || width > 30) {
                 this.info.setText("Incorrect width");
-            } else if (rabbitsNumber < 0 || rabbitsNumber > height * width / 2) {
+            } else if (rabbitsNumber < 0 || rabbitsNumber > height * width) {
                 this.info.setText("Incorrect number of rabbits");
             } else if (delay < 0 || delay > 100) {
                 this.info.setText("Incorrect delay");
             }
-
-            Simulator.setHeight(height);
-            Simulator.setWidth(width);
-            Simulator.setRabbitsNumber(rabbitsNumber);
-            Simulator.setDelay(delay);
 
         } catch (NumberFormatException ex) {
             this.info.setText("Incorrect data");
