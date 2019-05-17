@@ -70,6 +70,18 @@ public class Surface extends JFrame {
         return this.Wolf;
     }
 
+    public void moveRabbit(int xCurr, int yCurr, int xNext, int yNext) {
+        if (table[xCurr][yCurr].getColor().equals(table[0][0].getEmptyFieldColor())) {
+            table[xCurr][yCurr].setEmptyFiledColor();
+            table[xNext][yNext].setRabbitColor();
+        }
+    }
+
+    public void moveWolf(int xCurr, int yCurr, int xNext, int yNext) {
+        table[xCurr][yCurr].setEmptyFiledColor();
+        table[xNext][yNext].setWolfColor();
+    }
+
     private void addTableToSurface() {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
