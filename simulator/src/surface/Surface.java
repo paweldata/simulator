@@ -54,6 +54,10 @@ public class Surface extends JFrame {
         return this.table[i][j];
     }
 
+    public ArrayList<Rabbit> getRabbitList() {
+        return this.rabbitList;
+    }
+
     public int getRandomInt(int bound) {
         return generator.nextInt(bound);
     }
@@ -71,10 +75,8 @@ public class Surface extends JFrame {
     }
 
     public void moveRabbit(int xCurr, int yCurr, int xNext, int yNext) {
-        if (table[xCurr][yCurr].getColor().equals(table[0][0].getEmptyFieldColor())) {
-            table[xCurr][yCurr].setEmptyFiledColor();
-            table[xNext][yNext].setRabbitColor();
-        }
+        table[xCurr][yCurr].setEmptyFiledColor();
+        table[xNext][yNext].setRabbitColor();
     }
 
     public void moveWolf(int xCurr, int yCurr, int xNext, int yNext) {

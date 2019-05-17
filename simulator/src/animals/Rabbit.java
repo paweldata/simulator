@@ -15,6 +15,14 @@ public class Rabbit extends Thread {
       this.y = j;
    }
 
+   public int getX() {
+      return this.x;
+   }
+
+   public int getY() {
+      return this.y;
+   }
+
    private int distanceToWolf(int i, int j) {
       return Math.max(Math.abs(Surface.getWolf().getX() - i), Math.abs(Surface.getWolf().getY() - j));
    }
@@ -30,8 +38,8 @@ public class Rabbit extends Thread {
       if (this.x - 1 >= 0 && this.x + 1 <= height && this.y -1 >= 0 && this.y + 1 <= width) {
          //choose the best options and then choose random
 
-         for (int i = x - 1; i <= x + 1; i++) {
-            for (int j = y - 1; j <= y + 1; j++) {
+         for (int i = this.x - 1; i <= this.x + 1; i++) {
+            for (int j = this.y - 1; j <= this.y + 1; j++) {
                if (distanceToWolf(i, j)  < actualDiscance) {
                   BestFieldsX.add(i);
                   BestFieldsX.add(j);
@@ -41,8 +49,8 @@ public class Rabbit extends Thread {
       } else {
          //choose random
 
-         for (int i = x - 1; i <= x + 1; i++) {
-            for (int j = y - 1; j <= y + 1; j++) {
+         for (int i = this.x - 1; i <= this.x + 1; i++) {
+            for (int j = this.y - 1; j <= this.y + 1; j++) {
                if (i >= 0 && i <= height && j >= 0 && j <= width) {
                   BestFieldsX.add(i);
                   BestFieldsX.add(j);
@@ -51,7 +59,17 @@ public class Rabbit extends Thread {
          }
       }
 
+      if (BestFieldsX.size() == 0)
+         return;
+      
       int chooser = Surface.getRandomInt(BestFieldsX.size());
-      Surface.moveRabbit(this.x, this.y, BestFieldsX.get(chooser), BestFieldsY.get(chooser));
+      int i = BestFieldsX.get(chooser);
+      int j = BestFieldsY.get(chooser);
+
+      if (Surface.getField(i,j).getColor().equals(Surface.getField(i, j).getEmptyFieldColor())) {
+         Surface.moveRabbit(this.x, this.y, i, j);
+         this.x = i;
+         this.y = j;
+      }
    }
 }
