@@ -38,6 +38,38 @@ public class Surface extends JFrame {
         this.setVisible(true);
     }
 
+    public int getHeightofTable() {
+        return this.height;
+    }
+
+    public int getWidthofTable() {
+        return this.width;
+    }
+
+    public int getDelay() {
+        return this.delay;
+    }
+
+    public Field getField(int i, int j) {
+        return this.table[i][j];
+    }
+
+    public int getRandomInt(int bound) {
+        return generator.nextInt(bound);
+    }
+
+    public int getRabbitsNumber() {
+        return this.rabbitsNumber;
+    }
+
+    public void RabbitDead() {
+        this.rabbitsNumber = this.rabbitsNumber - 1;
+    }
+
+    public Wolf getWolf() {
+        return this.Wolf;
+    }
+
     private void addTableToSurface() {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -60,7 +92,7 @@ public class Surface extends JFrame {
                 j = generator.nextInt(width);
             } while (!table[i][j].getBackground().equals(emptyFieldColor));
 
-            this.rabbitList.add(new Rabbit(i, j));
+            this.rabbitList.add(new Rabbit(this, i, j));
             this.table[i][j].setRabbitColor();
         }
 
@@ -69,7 +101,7 @@ public class Surface extends JFrame {
             j = generator.nextInt(width);
         } while (!table[i][j].getBackground().equals(emptyFieldColor));
 
-        this.Wolf = new Wolf(i, j);
+        this.Wolf = new Wolf(this, i, j);
         this.table[i][j].setWolfColor();
     }
 }
