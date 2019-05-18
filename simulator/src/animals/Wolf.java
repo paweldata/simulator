@@ -15,6 +15,14 @@ public class Wolf extends Thread {
         this.y = j;
     }
 
+    @Override
+    public void run() {
+        while(true) {
+            Surface.getSimulation().doMove(this);
+            Thread.yield();
+        }
+    }
+
     public int getX() {
         return this.x;
     }
@@ -47,6 +55,12 @@ public class Wolf extends Thread {
         return NearRabbitsList.get(Surface.getRandomInt(NearRabbitsList.size()));
     }
 
+    private boolean fieldExist(int i, int j) {
+        if (i >= 0 && i < Surface.getHeight() && j >= 0 && j < Surface.getWidth())
+            return true;
+        return false;
+    }
+
     public void doMove() {
         Rabbit targetRabbit = chooseRabbit();
         int actualDiscance = distanceToRabbit(targetRabbit);
@@ -56,9 +70,9 @@ public class Wolf extends Thread {
 
         for (int i = this.x - 1; i <= this.x + 1; i++) {
             for (int j = this.y - 1; j <= this.y + 1; j++) {
-               if (distanceToRabbit(i, j, targetRabbit) < actualDiscance) {
+               if (fieldExist(i, j) && distanceToRabbit(i, j, targetRabbit) < actualDiscance) {
                     BestFieldsX.add(i);
-                    BestFieldsX.add(j);
+                    BestFieldsY.add(j);
                }
             }
         }
@@ -70,5 +84,9 @@ public class Wolf extends Thread {
         Surface.moveWolf(this.x, this.y, i, j);
         this.x = i;
         this.y = j;
+
+        if (Surface.checkRabbitDead()) {
+
+        }
     }
  }

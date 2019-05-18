@@ -15,6 +15,14 @@ public class Rabbit extends Thread {
       this.y = j;
    }
 
+   @Override
+   public void run() {
+      while(true) {
+         Surface.getSimulation().doMove(this);
+         Thread.yield();
+      }
+   }
+
    public int getX() {
       return this.x;
    }
@@ -35,14 +43,14 @@ public class Rabbit extends Thread {
       ArrayList<Integer> BestFieldsX = new ArrayList<Integer>();
       ArrayList<Integer> BestFieldsY = new ArrayList<Integer>();
 
-      if (this.x - 1 >= 0 && this.x + 1 <= height && this.y -1 >= 0 && this.y + 1 <= width) {
+      if (this.x - 1 >= 0 && this.x + 1 < height && this.y -1 >= 0 && this.y + 1 < width) {
          //choose the best options and then choose random
 
          for (int i = this.x - 1; i <= this.x + 1; i++) {
             for (int j = this.y - 1; j <= this.y + 1; j++) {
-               if (distanceToWolf(i, j)  < actualDiscance) {
+               if (distanceToWolf(i, j)  > actualDiscance) {
                   BestFieldsX.add(i);
-                  BestFieldsX.add(j);
+                  BestFieldsY.add(j);
                }
             }
          }
@@ -51,9 +59,9 @@ public class Rabbit extends Thread {
 
          for (int i = this.x - 1; i <= this.x + 1; i++) {
             for (int j = this.y - 1; j <= this.y + 1; j++) {
-               if (i >= 0 && i <= height && j >= 0 && j <= width) {
+               if (i >= 0 && i < height && j >= 0 && j < width) {
                   BestFieldsX.add(i);
-                  BestFieldsX.add(j);
+                  BestFieldsY.add(j);
                }
             }
          }

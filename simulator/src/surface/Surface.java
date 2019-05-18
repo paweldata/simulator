@@ -18,6 +18,7 @@ public class Surface extends JFrame {
     private Random generator;
     private ArrayList<Rabbit> rabbitList;
     private Wolf Wolf;
+    private Simulation Simulation;
 
     public Surface(int rabbitsNumber, int delay, int height, int width) {
         this.rabbitsNumber = rabbitsNumber;
@@ -26,6 +27,7 @@ public class Surface extends JFrame {
         this.width = width;
         this.generator = new Random();
         this.table = new Field[height][width];
+        this.Simulation = new Simulation(this);
 
         this.setLayout(new GridLayout(height, width));
         this.setSize(width * 50, height * 50);
@@ -36,6 +38,8 @@ public class Surface extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+
+        this.Simulation.run();
     }
 
     public int getHeightofTable() {
@@ -58,6 +62,10 @@ public class Surface extends JFrame {
         return this.rabbitList;
     }
 
+    public Simulation getSimulation() {
+        return this.Simulation;
+    }
+
     public int getRandomInt(int bound) {
         return generator.nextInt(bound);
     }
@@ -66,8 +74,18 @@ public class Surface extends JFrame {
         return this.rabbitsNumber;
     }
 
-    public void RabbitDead() {
-        this.rabbitsNumber = this.rabbitsNumber - 1;
+    public boolean checkRabbitDead() {
+        for (int i = 0; i < rabbitList.size(); i++) {
+            if (rabbitList.get(i).getX() == Wolf.getX() && rabbitList.get(i).getY() == Wolf.getY()) {
+                rabbitList.get(i).stop();
+                rabbitList.remove(i);
+                rabbitsNumber--;
+                if (rabbitsNumber == 0)
+                    Wolf.stop();
+                return true;
+            }
+        }
+        return false;
     }
 
     public Wolf getWolf() {

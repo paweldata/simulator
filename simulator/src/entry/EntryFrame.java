@@ -80,7 +80,7 @@ public class EntryFrame extends JFrame implements ActionListener {
                 this.info.setText("Incorrect width");
             } else if (rabbitsNumber < 0 || rabbitsNumber > height * width) {
                 this.info.setText("Incorrect number of rabbits");
-            } else if (delay < 0 || delay > 100) {
+            } else if (delay < 0 || delay > 10000) {
                 this.info.setText("Incorrect delay");
             }
 
