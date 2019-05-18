@@ -18,7 +18,14 @@ public class Rabbit extends Thread {
    @Override
    public void run() {
       while(true) {
-         Surface.getSimulation().doMove(this);
+         synchronized (Surface) {
+            doMove();
+            try {
+               Surface.wait();
+            } catch (InterruptedException ex) {
+               System.out.println("Lipa");
+            }
+         }
          Thread.yield();
       }
    }

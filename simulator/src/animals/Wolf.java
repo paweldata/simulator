@@ -18,8 +18,14 @@ public class Wolf extends Thread {
     @Override
     public void run() {
         while(true) {
-            Surface.getSimulation().doMove(this);
-            Thread.yield();
+            synchronized (Surface) {
+                doMove();
+                try {
+                    Surface.wait(Surface.getDelay());
+                } catch (InterruptedException ex) {}
+                
+                Surface.notifyAll();
+            }
         }
     }
 

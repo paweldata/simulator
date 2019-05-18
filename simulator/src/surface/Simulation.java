@@ -18,22 +18,24 @@ public class Simulation {
     }
 
     public void doMove(Rabbit Rabbit) {
-        synchronized (this) {
+        synchronized (Surface) {
             Rabbit.doMove();
             try {
-                //Thread.sleep(Surface.getDelay());
                 wait();
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+                System.out.println("Lipa");
+            }
+            Thread.yield();
         }
         
     }
 
     public void doMove(Wolf Wolf) {
-        synchronized (this) {
+        synchronized (Surface) {
             Wolf.doMove();
             try {
                 Thread.sleep(Surface.getDelay());
-                this.notifyAll();
+                Thread.yield();
             } catch (InterruptedException e) {
                 System.out.println("Lipa");
             }

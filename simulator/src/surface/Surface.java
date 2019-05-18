@@ -18,7 +18,7 @@ public class Surface extends JFrame {
     private Random generator;
     private ArrayList<Rabbit> rabbitList;
     private Wolf Wolf;
-    private Simulation Simulation;
+    //private Simulation Simulation;
 
     public Surface(int rabbitsNumber, int delay, int height, int width) {
         this.rabbitsNumber = rabbitsNumber;
@@ -27,7 +27,7 @@ public class Surface extends JFrame {
         this.width = width;
         this.generator = new Random();
         this.table = new Field[height][width];
-        this.Simulation = new Simulation(this);
+        //this.Simulation = new Simulation(this);
 
         this.setLayout(new GridLayout(height, width));
         this.setSize(width * 50, height * 50);
@@ -39,7 +39,15 @@ public class Surface extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
-        this.Simulation.run();
+        start();
+        //this.Simulation.run();
+    }
+
+    private void start() {
+        for (int i = 0; i < rabbitList.size(); i++) {
+            rabbitList.get(i).start();
+        }
+        Wolf.start();
     }
 
     public int getHeightofTable() {
@@ -62,9 +70,9 @@ public class Surface extends JFrame {
         return this.rabbitList;
     }
 
-    public Simulation getSimulation() {
+    /*public Simulation getSimulation() {
         return this.Simulation;
-    }
+    }*/
 
     public int getRandomInt(int bound) {
         return generator.nextInt(bound);
