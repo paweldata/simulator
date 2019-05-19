@@ -56,7 +56,8 @@ public class Surface extends JFrame {
     }
 
     public int getDelay() {
-        return this.delay;
+        return getRandomInt(this.delay) + this.delay/2;
+        //return this.delay;
     }
 
     public Field getField(int i, int j) {
