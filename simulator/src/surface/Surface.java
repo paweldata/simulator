@@ -18,7 +18,6 @@ public class Surface extends JFrame {
     private Random generator;
     private ArrayList<Rabbit> rabbitList;
     private Wolf Wolf;
-    //private Simulation Simulation;
 
     public Surface(int rabbitsNumber, int delay, int height, int width) {
         this.rabbitsNumber = rabbitsNumber;
@@ -27,7 +26,6 @@ public class Surface extends JFrame {
         this.width = width;
         this.generator = new Random();
         this.table = new Field[height][width];
-        //this.Simulation = new Simulation(this);
 
         this.setLayout(new GridLayout(height, width));
         this.setSize(width * 50, height * 50);
@@ -40,7 +38,6 @@ public class Surface extends JFrame {
         this.setVisible(true);
 
         start();
-        //this.Simulation.run();
     }
 
     private void start() {
@@ -70,16 +67,16 @@ public class Surface extends JFrame {
         return this.rabbitList;
     }
 
-    /*public Simulation getSimulation() {
-        return this.Simulation;
-    }*/
-
     public int getRandomInt(int bound) {
         return generator.nextInt(bound);
     }
 
     public int getRabbitsNumber() {
         return this.rabbitsNumber;
+    }
+
+    public Wolf getWolf() {
+        return this.Wolf;
     }
 
     public boolean checkRabbitDead() {
@@ -94,10 +91,6 @@ public class Surface extends JFrame {
             }
         }
         return false;
-    }
-
-    public Wolf getWolf() {
-        return this.Wolf;
     }
 
     public void moveRabbit(int xCurr, int yCurr, int xNext, int yNext) {

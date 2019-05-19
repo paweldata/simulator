@@ -8,18 +8,27 @@ public class Wolf extends Thread {
     private int x;
     private int y;
     private Surface Surface;
+    private int pauseTime;
 
     public Wolf(Surface s,int i, int j) {
         this.Surface = s;
         this.x = i;
         this.y = j;
+        this.pauseTime = 0;
     }
 
     @Override
     public void run() {
         while(true) {
+            if (pauseTime > 0) {
+                pauseTime--;
+            } else {
+                synchronized (Surface) {
+                    doMove();
+                }
+            }
+            
             synchronized (Surface) {
-                doMove();
                 try {
                     Surface.wait(Surface.getDelay());
                 } catch (InterruptedException ex) {}
@@ -62,7 +71,7 @@ public class Wolf extends Thread {
     }
 
     private boolean fieldExist(int i, int j) {
-        if (i >= 0 && i < Surface.getHeight() && j >= 0 && j < Surface.getWidth())
+        if (i >= 0 && i < Surface.getHeightofTable() && j >= 0 && j < Surface.getWidthofTable())
             return true;
         return false;
     }
@@ -92,7 +101,7 @@ public class Wolf extends Thread {
         this.y = j;
 
         if (Surface.checkRabbitDead()) {
-
+            pauseTime = 5;   
         }
     }
  }
