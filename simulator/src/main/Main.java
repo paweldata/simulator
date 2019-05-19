@@ -1,6 +1,7 @@
 package main;
 
 import entry.EntryFrame;
+
 /**
  * It's a simple simulator.
  * @author Paweł Data

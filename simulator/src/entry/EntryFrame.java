@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import surface.Surface;
+
 /**
  * Frame. Gets parameters from user.
  * @author Paweł Data
