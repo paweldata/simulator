@@ -2,19 +2,32 @@ package animals;
 
 import java.util.ArrayList;
 
-import surface.*;
+import surface.Surface;
 
+/**
+ * Rabbit escapes from the wolf.
+ * @author Paweł Data
+ */
 public class Rabbit extends Thread {
    private int x;
    private int y;
    private Surface Surface;
 
+   /**
+    * Class constructor.
+    * @param s Surface
+    * @param i height coordinate
+    * @param j width coordinate
+    */
    public Rabbit(Surface s ,int i, int j) {
       this.Surface = s;
       this.x = i;
       this.y = j;
    }
 
+   /**
+    * Start moving rabbit.
+    */
    @Override
    public void run() {
       while(true) {
@@ -30,19 +43,36 @@ public class Rabbit extends Thread {
       }
    }
 
+   /**
+    * Return rabbit's height coordinate.
+    * @return rabbit's height coordinate
+    */
    public int getX() {
       return this.x;
    }
 
+   /**
+    * Return rabbit's width coordinate.
+    * @return rabbit's width coordinate
+    */
    public int getY() {
       return this.y;
    }
 
+   /**
+    * Return distance to wolf.
+    * @param i x coordinate
+    * @param j y coordinate
+    * @return distance to wolf
+    */
    private int distanceToWolf(int i, int j) {
       return Math.max(Math.abs(Surface.getWolf().getX() - i), Math.abs(Surface.getWolf().getY() - j));
    }
 
-   public void doMove() {
+   /**
+    * Move rabbit.
+    */
+   private void doMove() {
       int actualDiscance = distanceToWolf(this.x, this.y);
       int height = Surface.getHeightofTable();
       int width = Surface.getWidthofTable();
