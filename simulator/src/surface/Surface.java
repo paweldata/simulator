@@ -138,11 +138,11 @@ public class Surface extends JFrame {
     public boolean checkRabbitDead() {
         for (int i = 0; i < rabbitList.size(); i++) {
             if (rabbitList.get(i).getX() == Wolf.getX() && rabbitList.get(i).getY() == Wolf.getY()) {
-                rabbitList.get(i).stop();
+                rabbitList.get(i).setIfAlive(false);
                 rabbitList.remove(i);
                 rabbitsNumber--;
                 if (rabbitsNumber == 0)
-                    Wolf.stop();
+                    Wolf.setIfALive(false);
                 return true;
             }
         }

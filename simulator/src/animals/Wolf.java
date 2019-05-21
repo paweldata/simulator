@@ -13,6 +13,7 @@ public class Wolf extends Thread {
     private int y;
     private Surface Surface;
     private int pauseTime;
+    private boolean ifAlive;
 
     /**
      * Class constructor
@@ -25,6 +26,7 @@ public class Wolf extends Thread {
         this.x = i;
         this.y = j;
         this.pauseTime = 0;
+        this.ifAlive = true;
     }
 
     /**
@@ -32,7 +34,7 @@ public class Wolf extends Thread {
      */
     @Override
     public void run() {
-        while(true) {
+        while(ifAlive) {
             if (pauseTime > 0) {
                 pauseTime--;
             } else {
@@ -65,6 +67,14 @@ public class Wolf extends Thread {
     */
     public int getY() {
         return this.y;
+    }
+
+    /**
+     * Set ifAlive
+     * @param ifAlive true if wolf is alive, false otherwise
+     */
+    public void setIfALive(boolean ifAlive) {
+        this.ifAlive = ifAlive;
     }
 
     /**

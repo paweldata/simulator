@@ -12,6 +12,7 @@ public class Rabbit extends Thread {
    private int x;
    private int y;
    private Surface Surface;
+   private boolean ifAlive;
 
    /**
     * Class constructor.
@@ -23,6 +24,7 @@ public class Rabbit extends Thread {
       this.Surface = s;
       this.x = i;
       this.y = j;
+      this.ifAlive = true;
    }
 
    /**
@@ -30,7 +32,7 @@ public class Rabbit extends Thread {
     */
    @Override
    public void run() {
-      while(true) {
+      while(ifAlive) {
          synchronized (Surface) {
             doMove();
             try {
@@ -57,6 +59,14 @@ public class Rabbit extends Thread {
     */
    public int getY() {
       return this.y;
+   }
+
+   /**
+    * set ifAlive
+    * @param ifAlive true if rabbit is alive, false otherwise
+    */
+   public void setIfAlive(boolean ifAlive) {
+      this.ifAlive = ifAlive;
    }
 
    /**
