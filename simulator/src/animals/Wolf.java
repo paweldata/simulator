@@ -41,7 +41,6 @@ public class Wolf extends Thread {
                 } else {
                     doMove();
                     Surface.validate();
-                    Surface.repaint();
                 }
                 
                 try {

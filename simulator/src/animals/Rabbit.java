@@ -36,7 +36,6 @@ public class Rabbit extends Thread {
          synchronized (Surface) {
             doMove();
             Surface.validate();
-            Surface.repaint();
 
             try {
                Surface.wait(Surface.getDelay());
