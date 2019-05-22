@@ -186,6 +186,16 @@ public class Surface extends JFrame {
     }
 
     /**
+     * Return distance to wolf 
+     * @param i x coordinate
+     * @param j y coordinate
+     * @return distance to wolf
+     */
+    private int distanceToWolf(int i, int j) {
+        return Math.max(Math.abs(Wolf.getX() - i), Math.abs(Wolf.getY() - j));
+    }
+
+    /**
      * Create animals and add to Surface.
      */
     private void addAnimalsToSurface() {
@@ -195,22 +205,20 @@ public class Surface extends JFrame {
         this.rabbitList = new ArrayList<Rabbit>();
         Color emptyFieldColor = table[0][0].getEmptyFieldColor();
 
+        i = generator.nextInt(height);
+        j = generator.nextInt(width);
+
+        this.Wolf = new Wolf(this, i, j);
+        this.table[i][j].setWolfColor();
+
         for (int k = 0; k < rabbitsNumber; k++) {
             do {
                 i = generator.nextInt(height);
                 j = generator.nextInt(width);
-            } while (!table[i][j].getBackground().equals(emptyFieldColor));
+            } while (!table[i][j].getBackground().equals(emptyFieldColor) || distanceToWolf(i, j) <= 1);
 
             this.rabbitList.add(new Rabbit(this, i, j));
             this.table[i][j].setRabbitColor();
         }
-
-        do {
-            i = generator.nextInt(height);
-            j = generator.nextInt(width);
-        } while (!table[i][j].getBackground().equals(emptyFieldColor));
-
-        this.Wolf = new Wolf(this, i, j);
-        this.table[i][j].setWolfColor();
     }
 }
