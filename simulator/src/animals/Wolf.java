@@ -35,15 +35,13 @@ public class Wolf extends Thread {
     @Override
     public void run() {
         while(ifAlive) {
-            if (pauseTime > 0) {
-                pauseTime--;
-            } else {
-                synchronized (Surface) {
+            synchronized (Surface) {
+                if (pauseTime > 0) {
+                    pauseTime--;
+                } else {
                     doMove();
                 }
-            }
-            
-            synchronized (Surface) {
+                
                 try {
                     Surface.wait(Surface.getDelay());
                 } catch (InterruptedException ex) {}
