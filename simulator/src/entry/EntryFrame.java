@@ -35,11 +35,11 @@ public class EntryFrame extends JFrame implements ActionListener {
         this.setSize(400, 400);
         this.setLayout(new GridLayout(5, 2));
 
-        this.add(new JLabel("Height (max 20) :"));
+        this.add(new JLabel("Height (from 3 to 20) :"));
         heightTextField = new JTextField();
         this.add(heightTextField);
 
-        this.add(new JLabel("Width (max 20) :"));
+        this.add(new JLabel("Width (from 3 to 20) :"));
         widthTextField = new JTextField();
         this.add(widthTextField);
 
@@ -89,9 +89,9 @@ public class EntryFrame extends JFrame implements ActionListener {
             rabbitsNumber = Integer.parseInt(this.rabbitsNumberTextField.getText());
             delay = Integer.parseInt(this.delayTextField.getText());
 
-            if (height < 0 || height > 20) {
+            if (height < 3 || height > 20) {
                 this.info.setText("Incorrect height");
-            } else if (width < 0 || width > 20) {
+            } else if (width < 3 || width > 20) {
                 this.info.setText("Incorrect width");
             } else if (rabbitsNumber < 0 || rabbitsNumber > height * width / 2) {
                 this.info.setText("Incorrect number of rabbits");
