@@ -40,13 +40,13 @@ public class Wolf extends Thread {
                     pauseTime--;
                 } else {
                     doMove();
+                    Surface.validate();
+                    Surface.repaint();
                 }
                 
                 try {
                     Surface.wait(Surface.getDelay());
                 } catch (InterruptedException ex) {}
-                
-                Surface.notifyAll();
             }
         }
     }

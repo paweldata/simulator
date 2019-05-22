@@ -35,13 +35,15 @@ public class Rabbit extends Thread {
       while(ifAlive) {
          synchronized (Surface) {
             doMove();
+            Surface.validate();
+            Surface.repaint();
+
             try {
-               Surface.wait();
+               Surface.wait(Surface.getDelay());
             } catch (InterruptedException ex) {
-               System.out.println("Lipa");
+               System.out.println(ex);
             }
          }
-         Thread.yield();
       }
    }
 
